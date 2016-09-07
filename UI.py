@@ -23,10 +23,6 @@ class UI:
             self.__canvas.delete("all")
             self.__canvas.create_line(self.__drawnPoints, fill="green")
         self.__window.after(32, self.__draw)
-
-    def run(self):
-        if len(self.__drawnPoints) > 0:
-            self.__draw()
         
 if __name__ == "__main__":
     ui = UI(640, 480)
