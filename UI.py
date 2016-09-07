@@ -2,9 +2,8 @@
 import tkinter as tk
 
 class UI:
-    __drawnPoints = []
-    
     def __init__(self, width, height):
+        self.__drawnPoints = []
         self.__window = tk.Tk()
         self.__canvas = tk.Canvas(self.__window, width=width, height=height, bg="black")
         self.__canvas.pack()
