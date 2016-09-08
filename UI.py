@@ -15,6 +15,7 @@ class UI:
         self.__window.bind("<B1-Motion>", self.__mouseMoveCallback)
         self.__updateKalmanPoints()
         self.__draw()
+        self.shouldRun = True
         self.__window.mainloop()
 
     def __mouseMoveCallback(self, event):
@@ -25,6 +26,7 @@ class UI:
     def __updateKalmanPoints(self):
         while not self.__kalmanQueue.empty():
             self.__kalmanPoints.append(self.__kalmanQueue.get())
+        self.__window.after(16, self.__updateKalmanPoints)
         
     def __draw(self):
         if len(self.__drawnPoints) > 3 and len(self.__drawnPoints) % 2 == 0:

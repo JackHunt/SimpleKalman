@@ -1,11 +1,10 @@
 import numpy as np
 
-class Kalman:
-    def __init__(self, transition, control, errorCov, observation, measureErrCov, mu, sigma):
+class LinearKalmanFilter:
+    def __init__(self, transition, control, errorCov, measureErrCov, mu, sigma):
         self.__transition = transition #Transition matrix.
         self.__control = control #Control matrix.
         self.__errorCov = errorCov #Error covariance.
-        self.__observation = observation #Observation matrix.
         self.__measureErrorCov = measureErrCov #Measurement error covariance.
         self.__mu = mu
         self.__sigma = sigma
