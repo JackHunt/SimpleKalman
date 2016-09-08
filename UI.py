@@ -65,6 +65,7 @@ class UI:
 
     def __exitCallback(self):
         self.shouldRun = False
+        self.__window.destroy()
 
     def getDrawnPoint(self):
         if not self.__inputQueue.empty():
