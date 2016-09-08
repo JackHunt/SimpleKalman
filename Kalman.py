@@ -18,7 +18,7 @@ class LinearKalmanFilter:
         K = self.__sigma.dot(self.__control.T).dot(np.linalg.inv(tmp))
         self.__mu = self.__mu + K.dot(z - self.__control.dot(self.__mu))
         tmp = K.dot(self.__control)
-        self.__sigma = (np.identity(tmp.shape[0], tmp.shape[1]) - tmp).dot(self.__sigma)
+        self.__sigma = (np.identity(tmp.shape[0]) - tmp).dot(self.__sigma)
 
     def processPoint(self, z, u):
         self.__predict(u)

@@ -13,18 +13,21 @@ class KalmanDemo(Thread):
     def run(self):
         while self.__ui.shouldRun:#To-do add stopping condition.
             inputPoint = self.__ui.getDrawnPoint()
-            if inputPoint not None:
-                output = self.__kf.processPoint(inputPoint)
-                self.__ui.pushKalmanPoint(output[0])
+            if inputPoint != None:
+                output = self.__kf.processPoint(np.asarray(inputPoint), np.asarray([0, 0]))
+                point = output[0]
+                self.__ui.pushKalmanPoint((int(point[0]), int(point[1])))
+#                print(inputPoint)
+                print(output[1])
 
 if __name__ == "__main__":
     #Initialise matrices.
-#    transition = np.asarray()
-#    control = np.asarray()
-#    errorCov = np.asarray()
-#    measureErrorCov = np.asarray()
-#    initialMu = np.asarray()
-#    initialSigma = np.asarray()
+    transition = np.asarray([[1, 0], [0, 1]])
+    control = np.identity(2)
+    errorCov = np.identity(2)
+    measureErrorCov = np.identity(2)*0.2
+    initialMu = np.asarray([1, 1])
+    initialSigma = np.identity(2)*0.2
 
     #Initialise UI and kalman filter.
     ui = ui.UI(640, 480)
@@ -33,4 +36,5 @@ if __name__ == "__main__":
     #Begin running the demo.
     demo = KalmanDemo(ui, kf)
     demo.start()
+    ui.start()
     demo.join()
