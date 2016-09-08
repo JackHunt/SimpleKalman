@@ -45,16 +45,17 @@ class KalmanDemo(Thread):
 
 if __name__ == "__main__":
     #Initialise matrices.
-    transition = np.asarray([[1, 0], [0, 1]])
+    transition = np.identity(2)
     control = np.identity(2)
-    errorCov = np.identity(2)*0.2
-    measureErrorCov = np.identity(2)*0.2
+    errorCov = np.identity(2)*0.5
+    measurement = np.identity(2)
+    measureErrorCov = np.identity(2)*0.5
     initialMu = np.asarray([1, 1])
-    initialSigma = np.identity(2)*0.2
+    initialSigma = np.identity(2)*0.5
 
     #Initialise UI and kalman filter.
     ui = ui.UI(640, 480)
-    kf = kalman.LinearKalmanFilter(transition, control, errorCov, measureErrorCov, initialMu, initialSigma)
+    kf = kalman.LinearKalmanFilter(transition, control, errorCov, measurement, measureErrorCov, initialMu, initialSigma)
 
     #Begin running the demo.
     demo = KalmanDemo(ui, kf)
